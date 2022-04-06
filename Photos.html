@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+ <html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        * {box-sizing: border-box;}
+        
+        .img-comp-container {
+          position: relative;
+          height: 200px; /*should be the same height as the images*/
+        }
+        
+        .img-comp-img {
+          position: absolute;
+          width: auto;
+          height: auto;
+          overflow:hidden;
+        }
+        
+        .img-comp-img img {
+          display:block;
+          /* vertical-align:middle; */
+        }
+        
+        .img-comp-slider {
+          position: absolute;
+          z-index:9;
+          cursor: ew-resize;
+          /*set the appearance of the slider:*/
+          width: 40px;
+          height: 40px;
+          background-color: #2196F3;
+          opacity: 0.7;
+          border-radius: 50%;
+        }
+        </style>
+        <script>
+        function initComparisons() {
+          var x, i;
+          /*find all elements with an "overlay" class:*/
+          x = document.getElementsByClassName("img-comp-overlay");
+          for (i = 0; i < x.length; i++) {
+            /*once for each "overlay" element:
+            pass the "overlay" element as a parameter when executing the compareImages function:*/
+            compareImages(x[i]);
+          }
+          function compareImages(img) {
+            var slider, img, clicked = 0, w, h;
+            /*get the width and height of the img element*/
+            w = img.offsetWidth;
+            h = img.offsetHeight;
+            /*set the width of the img element to 50%:*/
+            img.style.width = (w / 2) + "px";
+            /*create slider:*/
+            slider = document.createElement("DIV");
+            slider.setAttribute("class", "img-comp-slider");
+            /*insert slider*/
+            img.parentElement.insertBefore(slider, img);
+            /*position the slider in the middle:*/
+            slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+            slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+            /*execute a function when the mouse button is pressed:*/
+            slider.addEventListener("mousedown", slideReady);
+            /*and another function when the mouse button is released:*/
+            window.addEventListener("mouseup", slideFinish);
+            /*or touched (for touch screens:*/
+            slider.addEventListener("touchstart", slideReady);
+            /*and released (for touch screens:*/
+            window.addEventListener("touchstop", slideFinish);
+            function slideReady(e) {
+              /*prevent any other actions that may occur when moving over the image:*/
+              e.preventDefault();
+              /*the slider is now clicked and ready to move:*/
+              clicked = 1;
+              /*execute a function when the slider is moved:*/
+              window.addEventListener("mousemove", slideMove);
+              window.addEventListener("touchmove", slideMove);
+            }
+            function slideFinish() {
+              /*the slider is no longer clicked:*/
+              clicked = 0;
+            }
+            function slideMove(e) {
+              var pos;
+              /*if the slider is no longer clicked, exit this function:*/
+              if (clicked == 0) return false;
+              /*get the cursor's x position:*/
+              pos = getCursorPos(e)
+              /*prevent the slider from being positioned outside the image:*/
+              if (pos < 0) pos = 0;
+              if (pos > w) pos = w;
+              /*execute a function that will resize the overlay image according to the cursor:*/
+              slide(pos);
+            }
+            function getCursorPos(e) {
+              var a, x = 0;
+              e = e || window.event;
+              /*get the x positions of the image:*/
+              a = img.getBoundingClientRect();
+              /*calculate the cursor's x coordinate, relative to the image:*/
+              x = e.pageX - a.left;
+              /*consider any page scrolling:*/
+              x = x - window.pageXOffset;
+              return x;
+            }
+            function slide(x) {
+              /*resize the image:*/
+              img.style.width = x + "px";
+              /*position the slider:*/
+              slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+            }
+          }
+        }
+        </script>
+        </head>
+        <title>Photos</title>
+
+        <link href="stylesheet.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+
+    </head>
+    <body>
+        <div style="background-image: linear-gradient(230deg, rgb(0, 152, 253) 2%, rgb(199, 184, 136) 35%, rgb(255, 223, 116) 35.7639%, rgb(228, 152, 0) 87%);"> 
+            <div style="padding-top: 10px; padding-bottom: 10px;" class="container"> 
+                <div class="row text-success"> 
+                    <div class="col-md-12 col-lg-12"> 
+                        <marquee direction="left" scrolldelay="90" scrollamount="6" behavior="scroll" loop="0" style="z-index: 10;" id="M_Marq001">
+                            <span style="color: #480048; font-size: 22px;"><strong>WelCome To Gokul Nature Cure Yoga Center!!!<strong></span>
+                            <span style="color:#480048;font-family:Mangal;font-size:15px;"><strong>&nbsp;&nbsp;&nbsp; </strong></span>
+                        </marquee>                                     
+                    </div>                                 
+                </div>                             
+            </div>                         
+        </div>
+
+
+        <div class="header">
+            <h1><b>Gokul Nature Cure</b></h1>
+        </div>
+         <center>
+        <table>
+            <tr>
+                <td>
+                        <b><a href="/img/webpage.html">Home</a></b>
+                </td>
+                <td>
+                        <b><a href="/img/about us.html">About Us</a></b>
+                </td>
+                <td>
+                        <b><a href="/img/naturalcure.html">Natural Cure</a></b>
+                </td>
+                <td>
+                        <b><a href="/img/Benifits.html">Benfits</a></b>
+                </td>
+                <td>
+                        <b><a href="/img/Photos.html">Photos</a></b>
+                </td>
+                <td>
+                        <b><a href="/img/contacts us.html">Contact Us</a></b>
+                </td>
+                
+            </tr>
+        </table>
+    </center>
+    <hr>
+    <div class="container">
+        
+        <div class="row">
+          <div class="col" style="background-color:none;">
+            <div class="testimonial-pic radius">
+                <img src="/img/sau1.jpg" width="300" height="250" alt="sau1 image">
+            </div>                                                 
+            
+          </div>
+    
+    
+          <div class="col" style="background-color:none;">
+            <div class="testimonial-pic radius">
+                <img src="/img/sau2.jpg" width="300" height="250" alt="sau2 image">
+            </div>                                                 
+            
+         </div>
+    
+    
+          <div class="col" style="background-color:none;">
+            <div class="testimonial-pic radius">
+                <img src="/img/sau3.jpg" width="300" height="250" alt="sau3 image">
+            </div>                                                 
+            
+            
+          </div>
+        </div>
+      </div>
+    
+      <hr>  
+    
+      <div class="container">
+            
+        <div class="row">
+          <div class="col" style="background-color:none;">
+            <div class="testimonial-pic radius">
+                <img src="/img/sau4.jpg" width="300" height="250" alt="sau4 image">
+            </div>                                                 
+            
+          </div>
+    
+    
+          <div class="col" style="background-color:none;">
+            <div class="testimonial-pic radius">
+                <img src="/img/sau5.png" width="300" height="250" alt="sau5 image">
+            </div>                                                 
+            
+         </div>
+    
+    
+          <div class="col" style="background-color:none;">
+            <div class="testimonial-pic radius">
+                <img src="/img/sau6.jpg" width="300" height="250" alt="sau6 image">
+            </div>                                                 
+            
+            
+          </div>
+        </div>
+      </div>
+    <hr>
+    
+      <div class="container">
+            
+            <div class="row">
+              <div class="col" style="background-color:none;">
+                <div class="testimonial-pic radius">
+                    <img src="/img/sau7.jpeg" width="300" height="250" alt="sau7 image">
+                </div>                                                 
+                
+              </div>
+        
+        
+              <div class="col" style="background-color:none;">
+                <div class="testimonial-pic radius">
+                    <img src="/img/sau8.png" width="300" height="250" alt="sau8 image">
+                </div>                                                 
+                
+             </div>
+        
+        
+              <div class="col" style="background-color:none;">
+                <div class="testimonial-pic radius">
+                    <img src="/img/sau9.jpg" width="300" height="250" alt="sau9 image">
+                </div>                                                 
+                
+                
+              </div>
+            </div>
+          </div>
+    <hr>
+    <hr>
+
+
+    <div class="container">
+
+    <h1>Compare Two Images</h1>
+<div class="img-comp-container">
+  <div class="img-comp-img">
+    <img src="/img/kamini1.gif" width="850" height="300">
+  </div>
+  <div class="img-comp-img img-comp-overlay">
+    <img src="/img/kamini2.gif" width="850" height="300">
+  </div>
+</div>
+</div>
+
+
+<script>
+/*Execute a function that will execute an image compare function for each element with the img-comp-overlay class:*/
+initComparisons();
+</script>
+<br>
+<br>
+<hr>
+<hr>
+<hr>
+
+    <div class="pooja" style="background-color: skyblue;">
+        <footer class="container-fluid footer-btm">
+                <section class="container">
+                  <div class="row">
+                    <div class="col-lg-9">
+                      <address>
+                      <h4>Contact us</h4>
+                              <ul>
+                        <li>Address : vidya vihar colony, jalgoan, Ta-chopda, Maharashtra - jalgoan (India) - 425107 </li>
+                        <li>Mobile : 9420069610</li>
+                        <li>Email : <a href="yogeshvarideshmukh1234@gamil.com">yogeshvarideshmukh1234@gamil.com</a></li>
+                      </ul>
+                              </address>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <ul class="right" style="border: solid 1px black;">
+                            <li><a href="http://www.gokulnaturecure.com/contact-us.html" class="email-icon">Send E-mail</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                                    </div>
+                  </div>
+                </section>
+        
+                <div class="footer">
+                  <div class="container">
+                    <div class="row">
+                      <div class="copy col-md-6 col-xs-12">Copyright 2019 ©
+                                  Gokul Nature Cure Centre                    All Rights reserved.</div>
+                      <div class="copyright col-md-6 col-xs-12 pull-right">Design By : <a rel="nofollow" target="_blank" href="http://www.konnectionindia.com/">Konnection India DotCom Pvt Ltd </a></div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            <hr>
+        </div>
+        
+        
+        </body>
+        
+        </html>
+             
+           
+    </body>
+    </html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+    

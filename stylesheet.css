@@ -1,0 +1,59 @@
+body
+{
+   
+     background-color: bisque;
+     background-position:center;
+     background-size:cover;
+}
+
+
+.header {
+    background-image: url(hitu2.jpg);
+    text-align: center;
+    color: black;
+    font-size:25px;
+    font-style: italic;
+    width:98%;
+    margin: 1%;
+    margin-right:0%;
+    border-style: solid;
+    padding:1%;
+}
+table{
+    list-style-type: none;
+    margin: 8px;
+    text-align: center;
+    padding:2%;
+    background-color: none;
+    overflow: hidden;
+    width:60%;
+    text-size-adjust:40px;
+}
+.logo img
+{
+    float: top left;
+    width: 100px;
+    height: 100px;
+}
+a
+{
+    text-decoration: none;
+    color:black;
+    padding: 5px 20px;
+    border: 0px solid black;
+}
+ a:hover
+{
+  background-color: white;
+  color: black;
+}  
+
+a:active
+{
+    background-color:skyblue;
+    color: black;
+
+} 
+
+
+
